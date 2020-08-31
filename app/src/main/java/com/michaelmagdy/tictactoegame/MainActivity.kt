@@ -42,23 +42,24 @@ class MainActivity : AppCompatActivity() {
 
         if (activePlayer == 1){
             selectedButton.text = "X"
-            selectedButton.background
             selectedButton.setBackgroundResource(R.color.player1BackGround)
             player1.add(cellId)
             activePlayer = 2
+            selectedButton.isEnabled = false
             autoPlay()
         } else {
             selectedButton.text = "O"
             selectedButton.setBackgroundResource(R.color.player2BackGround)
             player2.add(cellId)
             activePlayer = 1
+            selectedButton.isEnabled = false
         }
 
-        selectedButton.isEnabled = false
+        //selectedButton.isEnabled = false
         checkWinner()
     }
 
-    fun checkWinner(){
+    fun checkWinner():Boolean{
 
         var winner = -1
 
@@ -105,11 +106,16 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Player 1 won the game", Toast.LENGTH_LONG).show()
             player1WinCount++
             restartGame()
+            return true
         } else if (winner == 2){
             Toast.makeText(this, "Player 2 won the game", Toast.LENGTH_LONG).show()
             player2WinCount++
             restartGame()
+            return true
+        } else {
+            return false
         }
+
     }
 
     fun autoPlay(){
@@ -121,25 +127,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
         if (emptyCells.isEmpty()){
-            restartGame()
+            if (checkWinner()){
+
+            } else {
+                restartGame()
+            }
+
+        } else {
+            val r = Random()
+            val randomIndex = r.nextInt(emptyCells.size)
+            val cellId = emptyCells[randomIndex]
+            var buttonToSelect:Button?
+            buttonToSelect = when(cellId){
+                1 -> button1
+                2 -> button2
+                3 -> button3
+                4 -> button4
+                5 -> button5
+                6 -> button6
+                7 -> button7
+                8 -> button8
+                9 -> button9
+                else -> {button1}
+            }
+            playGame(cellId, buttonToSelect)
         }
-        val r = Random()
-        val randomIndex = r.nextInt(emptyCells.size)
-        val cellId = emptyCells[randomIndex]
-        var buttonToSelect:Button?
-        buttonToSelect = when(cellId){
-            1 -> button1
-            2 -> button2
-            3 -> button3
-            4 -> button4
-            5 -> button5
-            6 -> button6
-            7 -> button7
-            8 -> button8
-            9 -> button9
-            else -> {button1}
-        }
-        playGame(cellId, buttonToSelect)
+
     }
 
     var player1WinCount = 0

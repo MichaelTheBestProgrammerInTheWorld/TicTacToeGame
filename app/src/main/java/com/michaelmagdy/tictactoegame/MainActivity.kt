@@ -182,7 +182,10 @@ class MainActivity : AppCompatActivity() {
             newButton.setBackgroundResource(android.R.color.background_light)
             newButton.isEnabled = true
         }
-        Toast.makeText(this, "Score: Player 1: $player1WinCount, Player 2: $player2WinCount",
-            Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, "Score: Player 1: $player1WinCount, Player 2: $player2WinCount",
+//            Toast.LENGTH_LONG).show()
+
+        player1_txt.text = "Player 1  $player1WinCount"
+        player2_txt.text = "Player 2  $player2WinCount"
     }
 }

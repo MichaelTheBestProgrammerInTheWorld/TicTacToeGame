@@ -50,7 +50,10 @@ class MainActivity : AppCompatActivity() {
             player1.add(cellId)
             activePlayer = 2
             selectedButton.isEnabled = false
-            autoPlay()
+            if (singleRadioButton.isChecked){
+                autoPlay()
+            }
+
         } else {
             selectedButton.text = "O"
             selectedButton.setBackgroundResource(R.color.player2BackGround)
